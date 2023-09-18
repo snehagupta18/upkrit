@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>upkrit waste classification</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://use.fontawesome.com/305ad9003c.js"></script>
+
+  <style>
+.topnav {
+  overflow: hidden;
+  background-color: #9d3f9c;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(156, 55, 149);
+}
+
+.topnav a.active {
+  background-color: rgb(255, 255, 255);
+  color: rgb(156, 55, 149);
+}
+
+a {
+  cursor: alias;
+  color: rgb(156, 55, 149);
+  font-size: 120%;
+}
+
+h4{ 
+  padding-top: 4%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+  /* background-color: rgb(183, 168, 198); */
+}
+
+h3{
+  color: rgb(255, 255, 255);
+  background-color: rgb(156, 55, 149);
+  padding-top: 2%;
+  padding-bottom: 1%;
+  padding-left: 4px;
+}
+
+h2{
+  color: rgb(255, 255, 255);
+  background-color: rgb(156, 55, 149);
+  padding-top: 2%;
+  padding-bottom: 1%;
+  padding-left: 4px;
+}
+
+@media screen and (min-width: 601px) {
+  h4 {
+    font-size: 25px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .image-upload img
+  {
+      width: 80px;
+      cursor: pointer;
+  }
+
+  #upload-web {
+    display: block;
+  }
+
+  #upload-mobile {
+    display: none;
+  }
+
+  .classify-button{
+    border: 2px;
+    background: none;
+    background-color: rgb(156, 55, 149);
+    color: rgb(255, 255, 255);
+    font-size: large;
+    width: 250px;
+    padding: 10px;
+    -moz-border-radius-top-right: 5px;
+    -webkit-border-radius-top-right: 5px;
+    -moz-border-radius-bottom-right: 5px;
+    -webkit-border-radius-bottom-right: 5px;
+    cursor:pointer;
+  }
+
+  #logo-img{
+    height: 140px;
+    width: 580px;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  h4 {
+    font-size: 15px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 12px;
+  }
+
+  .image-upload img
+  {
+      width: 40px;
+      cursor: pointer;
+  }
+
+  #upload-web {
+    display: none;
+  }
+
+  #upload-mobile {
+    display: block;
+  }
+
+  .classify-button{
+    border: 0px;
+    background: none;
+    background-color: rgb(156, 55, 149);
+    color: rgb(255, 255, 255);
+    font-size: small;
+    font-weight: bold;
+    width: 195px;
+    padding: 10px;
+    -moz-border-radius-top-right: 5px;
+    -webkit-border-radius-top-right: 5px;
+    -moz-border-radius-bottom-right: 5px;
+    -webkit-border-radius-bottom-right: 5px;
+    cursor:pointer;
+  }
+
+  #logo-img{
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+
+  
+
+}
+
+body{
+  background-color: white !important;
+  font-family: 'Times New Roman';
+}
+
+.classy_frame{
+  position: relative;
+  display: block;
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: none;
+  transform: scale(0.98) translateY(5px);
+  padding-top: 2%;
+  margin-bottom: 3%;
+
+  
+}
+.classy_frame:hover{
+  box-shadow: none
+  
+}
+
+hr {
+  border:6px solid rgb(156, 55, 149)b;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  
+}
+
+.image-upload > input
+{
+    display: none;
+}
+
+#loading {
+    background: #000000 url("{{ url_for('static', filename='images/loading.gif') }}") no-repeat center center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999;
+    display: none;
+}
+
+</style>
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='images/upkrit.ico') }}" type="image/x-icon">
+<!-- {{ JSGlue.include() }} this is use for use url_for() from javascript -->
+</head>
+<body>
+
+  <nav class="navbar" style="background-color: white !important; margin-bottom: 0; border-bottom: white !important;">
+    <div class="container">
+      <center>
+      <div>
+        <a href="/"><img id="logo-img" src="{{ url_for('static', filename = 'images/upkrit.jpg') }}"  alt="upkrit" title = "upkrit"></center></a>
+      </div>
+      </center>
+    </div>
+  </nav>
+  <br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="errorPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content classy_frame" style="background-color: #ffffff !important;">
+        <div class="modal-header">
+          <p class="modal-title" id="errorTitle" style="color:rgb(156, 55, 149);font-size:large;">Modal title</p>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:rgb(255, 255, 255);font-size: large;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="color:rgb(156, 55, 149); font-size:medium;" id="errorMessage" style="color:rgb(255, 255, 255);"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color:rgb(156, 55, 149); color: rgb(255, 255, 255);">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="loading">
+    <h3 style="text-align: center;">Waste Classificationn Initiated...</h3>
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+
+  <footer style="background-color: rgb(183, 168, 198) !important;">
+    <div class="container">
+        <div class="row" id="footerimg">
+            <img src="{{ url_for('static', filename = 'images/WasteBins.jpg') }}" alt="WasteBins" class="img-fluid" style="display: block; margin: 0 auto; border-radius: 50%;">
+        </div>
+        <br>
+        <div class="row" style="background-color: rgb(156, 55, 149);">
+            <p style="color: rgb(255, 255, 255); text-align: center;">KEEP IT GREEN - REDUCE, REUSE, RECYCLE.</p>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>
